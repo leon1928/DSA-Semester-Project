@@ -10,7 +10,6 @@ class P_List
 		P_Node* Root = List;
 
 		int ArrSize{ 10 };
-		int EnteredValues{ 0 };
 		P_Node** Arr = new P_Node* [ArrSize];
 
 		stack <int> Deleted;

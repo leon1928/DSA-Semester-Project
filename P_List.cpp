@@ -21,7 +21,6 @@ void P_List::Add(int Id1, int Rank1, string Name1)
 		List->Name = Name1;
 
 		Arr[Id1] = List;
-		EnteredValues++;
 		cout << "Here 1\n";
 	}
 	else
@@ -42,17 +41,14 @@ void P_List::Add(int Id1, int Rank1, string Name1)
 			cout << Deleted.empty();
 			if (Deleted.empty())
 			{
-				cout << "Entered values: "<< EnteredValues << endl;
 				Arr[Id1] = List;
 				cout << "\nArray\n";
-				EnteredValues++;
 			}
 			else
 			{
 				cout << "Array 2";
 				Arr[Deleted.top()] = List;
 				Deleted.pop();
-				EnteredValues++;
 			}
 
 			List = Root;
@@ -73,17 +69,14 @@ void P_List::Add(int Id1, int Rank1, string Name1)
 
 			if (Deleted.empty())
 			{
-				cout << "Entered values: " << EnteredValues << endl;
 				Arr[Id1] = List;
 				cout << "\nArray\n";
-				EnteredValues++;
 			}
 			else
 			{
 				cout << "Array 2";
 				Arr[Deleted.top()] = List;
 				Deleted.pop();
-				EnteredValues++;
 			}
 
 			List = Root;
