@@ -132,6 +132,7 @@
     <ClCompile Include="P_List.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DeveloperNotes.h" />
     <ClInclude Include="Libraries.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="P_List.h" />

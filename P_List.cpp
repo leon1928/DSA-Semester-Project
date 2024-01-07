@@ -10,7 +10,7 @@ P_List::P_List()
 	}
 }
 
-void P_List::Add(int Id1, int Rank1, string Name1)
+void P_List::P_Add(int Id1, int Rank1, string Name1)
 {
 	if (Nodes == 0)
 	{
@@ -21,7 +21,6 @@ void P_List::Add(int Id1, int Rank1, string Name1)
 		List->Name = Name1;
 
 		Arr[Id1] = List;
-		cout << "Here 1\n";
 	}
 	else
 	{
@@ -30,7 +29,6 @@ void P_List::Add(int Id1, int Rank1, string Name1)
 		{
 			List->Right = new P_Node;
 			List->Right->Previous = List;
-			cout << List->Right->Previous << endl << endl;
 			List = List->Right;
 
 			Nodes++;
@@ -38,27 +36,23 @@ void P_List::Add(int Id1, int Rank1, string Name1)
 			List->Id = Id1;
 			List->Rank = Rank1;
 			List->Name = Name1;
-			cout << Deleted.empty();
+
 			if (Deleted.empty())
 			{
 				Arr[Id1] = List;
-				cout << "\nArray\n";
 			}
 			else
 			{
-				cout << "Array 2";
 				Arr[Deleted.top()] = List;
 				Deleted.pop();
 			}
 
 			List = Root;
-			cout << "Here 2\n";
 		}
 		else if (Id1 < List->Id && List->Left == nullptr)
 		{
 			List->Left = new P_Node;
 			List->Left->Previous = List;
-			cout << List->Left->Previous << endl << endl;
 			List = List->Left;
 
 			Nodes++;
@@ -70,28 +64,23 @@ void P_List::Add(int Id1, int Rank1, string Name1)
 			if (Deleted.empty())
 			{
 				Arr[Id1] = List;
-				cout << "\nArray\n";
 			}
 			else
 			{
-				cout << "Array 2";
 				Arr[Deleted.top()] = List;
 				Deleted.pop();
 			}
 
 			List = Root;
-			cout << "Here 3\n";
 		}
 		else if (Id1 > List->Id && List->Right != nullptr)
 		{
 			List = List->Right;
-			cout << "Here 4\n";
 			goto a;
 		}
 		else if (Id1 < List->Id && List->Left != nullptr)
 		{
 			List = List->Left;
-			cout << "Here 5\n";
 			goto a;
 		}
 		else
@@ -100,9 +89,10 @@ void P_List::Add(int Id1, int Rank1, string Name1)
 			cout << "Something went wrong, Hi from P_List.cpp line 86\n";
 		}
 	}
+	EnteredElements++;
 }
 
-void P_List::Delete(int Id1)
+void P_List::P_Delete(int Id1)
 {
 	if (Id1 >= ArrSize || Id1 < 0)
 	{
@@ -271,10 +261,112 @@ void P_List::Delete(int Id1)
 			{
 				cout << "\nSomething went wrong, Hi from line 203 in P_List.cpp\n";
 			}
+			TraverseRight = nullptr;
+			delete TraverseRight;
 		}
 		Arr[Id1] = nullptr;
 		Deleted.push(Id1);
+		EnteredElements--;
 	}
+}
+
+void P_List::P_PrintAllArr()
+{
+	if (Nodes != 0)
+	{
+		cout << "\nAll the entries are:\n";
+		for (int i{ 0 }; i < ArrSize; i++)
+		{
+			if (Arr[i] != nullptr)
+			{
+				cout << "Id: " << Arr[i]->Id << endl;
+				cout << "Name: " << Arr[i]->Name << endl;
+				cout << "Rank: " << Arr[i]->Rank << endl << endl;
+			}
+		}
+	}
+	else
+	{
+		cout << "\nThere are no entries to display\n";
+	}
+	
+}
+
+int P_List::P_NumberOfEntries()
+{
+	return EnteredElements;
+}
+
+int P_List::P_CurrentCapacity()
+{
+	return ArrSize;
+}
+
+bool P_List::P_LimitReached()
+{
+	if (EnteredElements == ArrSize - 1)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+void P_List::P_Update()
+{
+	int TempSize = ArrSize;
+	P_Node** TempArr = new P_Node * [TempSize];
+
+	for (int i{ 0 }; i < ArrSize; i++)
+	{
+		TempArr[i] = Arr[i];
+		Arr[i] = nullptr;
+	}
+
+	delete[] Arr;
+
+	ArrSize *= 2;
+
+	P_Node** Arr = new P_Node * [ArrSize];
+
+	for (int i{ 0 }; i < TempSize; i++)
+	{
+		Arr[i] = TempArr[i];
+		TempArr[i] = nullptr;
+	}
+
+	delete[] TempArr;
+
+	cout << "\n Officers list update successful\n";
+}
+
+bool P_List::P_IdExists(int Id1)
+{
+	if (Id1 < ArrSize && Id1 > 0 && Arr[Id1] != nullptr)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+void P_List::P_UpdateRecord(int Id1, int Rank1, string Name1)
+{
+	Arr[Id1]->Rank = Rank1;
+	Arr[Id1]->Name = Name1;
+	cout << "\nRecord updated successfully\n";
+}
+
+void P_List::P_Search(int Id1)
+{
+	cout << "\nRecord found:\n";
+	cout << "ID: " << Arr[Id1] << endl;
+	cout << "Rank:" << Arr[Id1] << endl;
+	cout << "Name: " << Arr[Id1] << endl;
 }
 
 void P_List::Size()
