@@ -86,7 +86,7 @@ void P_List::P_Add(int Id1, int Rank1, string Name1)
 		else
 		{
 			//This section is reserved for the case when we have duplicate values in id even though no such case should exist due to how the system is coded
-			cout << "Something went wrong, Hi from P_List.cpp line 86\n";
+			cout << "Something went wrong, Hi from P_List.cpp line 89\n";
 		}
 	}
 	EnteredElements++;
@@ -114,10 +114,14 @@ void P_List::P_Delete(int Id1)
 				List->Left = nullptr;
 				delete Temp;
 			}
-			if (Id1 == List->Right->Id)
+			else if (Id1 == List->Right->Id)
 			{
 				List->Right = nullptr;
 				delete Temp;
+			}
+			else
+			{
+				cout << "Something went wrong, Hi from line 124 of P_List.cpp\n";
 			}
 		}
 		else if (Temp->Left != nullptr && Temp->Right == nullptr)	//case where the node has a left and the right is null
@@ -129,12 +133,16 @@ void P_List::P_Delete(int Id1)
 				Temp->Left = nullptr;
 				delete Temp;
 			}
-			if (Id1 == List->Right->Id)
+			else if (Id1 == List->Right->Id)
 			{
 				List->Right = Temp->Left;
 				Temp->Left->Previous = List;
 				Temp->Left = nullptr;
 				delete Temp;
+			}
+			else
+			{
+				cout << "Something went wrong, Hi from line 145 of P_List.cpp\n";
 			}
 		}
 		else if (Temp->Right != nullptr && Temp->Left == nullptr)	//case where the node has a right and left is null
@@ -146,12 +154,16 @@ void P_List::P_Delete(int Id1)
 				Temp->Right = nullptr;
 				delete Temp;
 			}
-			if (Id1 == List->Right->Id)
+			else if (Id1 == List->Right->Id)
 			{
 				List->Right = Temp->Right;
 				Temp->Right->Previous = List;
 				Temp->Right = nullptr;
 				delete Temp;
+			}
+			else
+			{
+				cout << "Something went wrong, Hi from line 166 of P_List.cpp\n";
 			}
 		}
 		else //case where the node that is to be deleted has a both left and right
@@ -187,13 +199,17 @@ void P_List::P_Delete(int Id1)
 					delete TempRight;
 					delete Temp;
 				}
-				if (Id1 == List->Right->Id)
+				else if (Id1 == List->Right->Id)
 				{
 					List->Right = TempRight;
 					TempRight->Previous = List;
 					TempRight = nullptr;
 					delete TempRight;
 					delete Temp;
+				}
+				else
+				{
+					cout << "Something went wrong, Hi from line 212 of P_List.cpp\n";
 				}
 				
 			}
@@ -213,13 +229,17 @@ void P_List::P_Delete(int Id1)
 					delete TempRight;
 					delete Temp;
 				}
-				if (Id1 == List->Right->Id)
+				else if (Id1 == List->Right->Id)
 				{
 					List->Right = TempRight;
 					TempRight->Previous = List;
 					TempRight = nullptr;
 					delete TempRight;
 					delete Temp;
+				}
+				else
+				{
+					cout << "Something went wrong, Hi from line 242 of P_List.cpp\n";
 				}
 			}
 			else if (TempLeft->Id > TraverseRight->Left->Id && TempRight->Left->Right == nullptr)
@@ -259,7 +279,7 @@ void P_List::P_Delete(int Id1)
 			}
 			else
 			{
-				cout << "\nSomething went wrong, Hi from line 203 in P_List.cpp\n";
+				cout << "\nSomething went wrong, Hi from line 282 in P_List.cpp\n";
 			}
 			TraverseRight = nullptr;
 			delete TraverseRight;
