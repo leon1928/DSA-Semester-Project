@@ -18,15 +18,27 @@
     <ClCompile Include="DSA Semester Project.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Node.cpp">
+    <ClCompile Include="P_Node.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="P_List.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="F_Node.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F_List.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C_Node.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C_List.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Node.h">
+    <ClInclude Include="P_Node.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="P_List.h">
@@ -36,6 +48,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DeveloperNotes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F_Node.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F_List.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C_Node.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C_List.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
