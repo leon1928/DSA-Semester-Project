@@ -31,13 +31,13 @@ void P_List::P_Add(int Id1, int Rank1, string Name1)
 			List->Right->Previous = List;
 			List = List->Right;
 
-			Nodes++;
+			//Nodes++;
 
 			List->Id = Id1;
 			List->Rank = Rank1;
 			List->Name = Name1;
 
-			if (Deleted.empty())
+			/*if (Deleted.empty())
 			{
 				Arr[Id1] = List;
 			}
@@ -45,7 +45,9 @@ void P_List::P_Add(int Id1, int Rank1, string Name1)
 			{
 				Arr[Deleted.top()] = List;
 				Deleted.pop();
-			}
+			}*/
+
+			Arr[Id1] = List;	//Remove this and make the commented part above part of the code again if things start acting up
 
 			List = Root;
 		}
@@ -55,13 +57,13 @@ void P_List::P_Add(int Id1, int Rank1, string Name1)
 			List->Left->Previous = List;
 			List = List->Left;
 
-			Nodes++;
+			//Nodes++;
 
 			List->Id = Id1;
 			List->Rank = Rank1;
 			List->Name = Name1;
 
-			if (Deleted.empty())
+			/*if (Deleted.empty())
 			{
 				Arr[Id1] = List;
 			}
@@ -69,7 +71,9 @@ void P_List::P_Add(int Id1, int Rank1, string Name1)
 			{
 				Arr[Deleted.top()] = List;
 				Deleted.pop();
-			}
+			}*/
+
+			Arr[Id1] = List;	//Remove this and make the commented part above part of the code again if things start acting up
 
 			List = Root;
 		}
@@ -387,6 +391,18 @@ void P_List::P_Search(int Id1)
 	cout << "ID: " << Arr[Id1] << endl;
 	cout << "Rank:" << Arr[Id1] << endl;
 	cout << "Name: " << Arr[Id1] << endl;
+}
+
+bool P_List::P_IsDeletedEmpty()
+{
+	return Deleted.empty();
+}
+
+int P_List::P_GetDeletedId()
+{
+	int Temp = Deleted.top();
+	Deleted.pop();
+	return Temp;
 }
 
 void P_List::Size()

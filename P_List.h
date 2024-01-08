@@ -27,6 +27,8 @@ class P_List
 		bool P_LimitReached();
 		void P_Update();
 		bool P_IdExists(int Id1);
+		bool P_IsDeletedEmpty();
 		void P_Search(int Id1);
+		int P_GetDeletedId();
 		void Size();
 };
