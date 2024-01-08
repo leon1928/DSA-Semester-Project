@@ -76,7 +76,7 @@ int main()
 										Officers.P_Add(P_Id, Rank, Name);
 										P_LastEntered.push(P_Id);
 
-										cout << "Record entered succesffully, Id assigned to this officer is: " << P_Id;
+										cout << "\nRecord entered successfully, Id assigned to this officer is: " << P_Id;
 
 										P_Id++;
 									}
@@ -99,7 +99,7 @@ int main()
 									Officers.P_Add(P_Id, Rank, Name);
 									P_LastEntered.push(P_Id);
 
-									cout << "Record entered succesffully, Id assigned to this officer is: " << P_Id;
+									cout << "Record entered successfully, Id assigned to this officer is: " << P_Id;
 
 									P_Id++;
 								}
