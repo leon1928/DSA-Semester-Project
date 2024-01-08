@@ -113,15 +113,21 @@ void P_List::P_Delete(int Id1)
 
 		if (Temp->Left == nullptr && Temp->Right == nullptr)	//case where the nodes both left and right are null
 		{
-			if (Id1 == List->Left->Id)
+			if (List->Left != nullptr)
 			{
-				List->Left = nullptr;
-				delete Temp;
+				if (Id1 == List->Left->Id)	//error to be resolved (crashes code as the condition tries to check left id even if it doesn't exist)
+				{
+					List->Left = nullptr;
+					delete Temp;
+				}
 			}
-			else if (Id1 == List->Right->Id)
+			else if (List->Right != nullptr)
 			{
-				List->Right = nullptr;
-				delete Temp;
+				if (Id1 == List->Right->Id)
+				{
+					List->Right = nullptr;
+					delete Temp;
+				}
 			}
 			else
 			{
@@ -130,19 +136,25 @@ void P_List::P_Delete(int Id1)
 		}
 		else if (Temp->Left != nullptr && Temp->Right == nullptr)	//case where the node has a left and the right is null
 		{
-			if (Id1 == List->Left->Id)
+			if (List->Left != nullptr)
 			{
-				List->Left = Temp->Left;
-				Temp->Left->Previous = List;
-				Temp->Left = nullptr;
-				delete Temp;
+				if (Id1 == List->Left->Id)
+				{
+					List->Left = Temp->Left;
+					Temp->Left->Previous = List;
+					Temp->Left = nullptr;
+					delete Temp;
+				}
 			}
-			else if (Id1 == List->Right->Id)
+			else if (List->Right != nullptr)
 			{
-				List->Right = Temp->Left;
-				Temp->Left->Previous = List;
-				Temp->Left = nullptr;
-				delete Temp;
+				if (Id1 == List->Right->Id)
+				{
+					List->Right = Temp->Left;
+					Temp->Left->Previous = List;
+					Temp->Left = nullptr;
+					delete Temp;
+				}
 			}
 			else
 			{
@@ -151,19 +163,25 @@ void P_List::P_Delete(int Id1)
 		}
 		else if (Temp->Right != nullptr && Temp->Left == nullptr)	//case where the node has a right and left is null
 		{
-			if (Id1 == List->Left->Id)
+			if (List->Left != nullptr)
 			{
-				List->Left = Temp->Right;
-				Temp->Right->Previous = List;
-				Temp->Right = nullptr;
-				delete Temp;
+				if (Id1 == List->Left->Id)
+				{
+					List->Left = Temp->Right;
+					Temp->Right->Previous = List;
+					Temp->Right = nullptr;
+					delete Temp;
+				}
 			}
-			else if (Id1 == List->Right->Id)
+			else if (List->Right != nullptr)
 			{
-				List->Right = Temp->Right;
-				Temp->Right->Previous = List;
-				Temp->Right = nullptr;
-				delete Temp;
+				if (Id1 == List->Right->Id)
+				{
+					List->Right = Temp->Right;
+					Temp->Right->Previous = List;
+					Temp->Right = nullptr;
+					delete Temp;
+				}
 			}
 			else
 			{
@@ -195,21 +213,27 @@ void P_List::P_Delete(int Id1)
 
 				//TempRight->Previous = List;
 
-				if (Id1 == List->Left->Id)
+				if (List->Left != nullptr)
 				{
-					List->Left = TempRight;
-					TempRight->Previous = List;
-					TempRight = nullptr;
-					delete TempRight;
-					delete Temp;
+					if (Id1 == List->Left->Id)
+					{
+						List->Left = TempRight;
+						TempRight->Previous = List;
+						TempRight = nullptr;
+						delete TempRight;
+						delete Temp;
+					}
 				}
-				else if (Id1 == List->Right->Id)
+				else if (List->Right != nullptr)
 				{
-					List->Right = TempRight;
-					TempRight->Previous = List;
-					TempRight = nullptr;
-					delete TempRight;
-					delete Temp;
+					if (Id1 == List->Right->Id)
+					{
+						List->Right = TempRight;
+						TempRight->Previous = List;
+						TempRight = nullptr;
+						delete TempRight;
+						delete Temp;
+					}
 				}
 				else
 				{
@@ -225,21 +249,27 @@ void P_List::P_Delete(int Id1)
 				TempLeft = nullptr;
 				delete TempLeft;
 
-				if (Id1 == List->Left->Id)
+				if (List->Left != nullptr)
 				{
-					List->Left = TempRight;
-					TempRight->Previous = List;
-					TempRight = nullptr;
-					delete TempRight;
-					delete Temp;
+					if (Id1 == List->Left->Id)
+					{
+						List->Left = TempRight;
+						TempRight->Previous = List;
+						TempRight = nullptr;
+						delete TempRight;
+						delete Temp;
+					}
 				}
-				else if (Id1 == List->Right->Id)
+				else if (List->Right != nullptr)
 				{
-					List->Right = TempRight;
-					TempRight->Previous = List;
-					TempRight = nullptr;
-					delete TempRight;
-					delete Temp;
+					if (Id1 == List->Right->Id)
+					{
+						List->Right = TempRight;
+						TempRight->Previous = List;
+						TempRight = nullptr;
+						delete TempRight;
+						delete Temp;
+					}
 				}
 				else
 				{
@@ -254,21 +284,31 @@ void P_List::P_Delete(int Id1)
 				TempLeft = nullptr;
 				delete TempLeft;
 
-				if (Id1 == List->Left->Id)
+				if (List->Left != nullptr)
 				{
-					List->Left = TempRight;
-					TempRight->Previous = List;
-					TempRight = nullptr;
-					delete TempRight;
-					delete Temp;
+					if (Id1 == List->Left->Id)
+					{
+						List->Left = TempRight;
+						TempRight->Previous = List;
+						TempRight = nullptr;
+						delete TempRight;
+						delete Temp;
+					}
 				}
-				if (Id1 == List->Right->Id)
+				else if (List->Right != nullptr)
 				{
-					List->Right = TempRight;
-					TempRight->Previous = List;
-					TempRight = nullptr;
-					delete TempRight;
-					delete Temp;
+					if (Id1 == List->Right->Id)
+					{
+						List->Right = TempRight;
+						TempRight->Previous = List;
+						TempRight = nullptr;
+						delete TempRight;
+						delete Temp;
+					}
+				}
+				else
+				{
+					cout << "\nSomething went wrong, Hi from line 311 of P_List.cpp\n";
 				}
 			}
 			else if (TempLeft->Id < TraverseRight->Left->Id && TempRight->Left->Left != nullptr)

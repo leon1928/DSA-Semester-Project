@@ -76,13 +76,15 @@ int main()
 										Officers.P_Add(P_Id, Rank, Name);
 										P_LastEntered.push(P_Id);
 
-										cout << "\nRecord entered successfully, Id assigned to this officer is: " << P_Id;
+										cout << "\nRecord entered successfully, Id assigned to this officer is: " << P_Id << endl;
 
 										P_Id++;
 									}
 									else
 									{
 										Officers.P_Add(Officers.P_GetDeletedId(), Rank, Name);
+										P_LastEntered.push(P_Id);
+										cout << "\nRecord entered successfully, Id assigned to this officer is: " << Officers.P_GetDeletedId() << endl;
 									}
 								}
 								else
@@ -113,13 +115,48 @@ int main()
 						}
 						case 'B':
 						{
+							int Id;
+							int Rank;
+							string Name;
 
+							cout << "Entet the id of the officer that you want to update: ";
+							cin >> Id;
+
+							if (Officers.P_IdExists(Id))
+							{
+								Officers.P_Search(Id);
+
+								cout << "Enter the new rank of the officer: ";
+								cin >> Rank;
+
+								cout << "Enter the updated name of the officer: ";
+								cin >> Name;
+
+								Officers.P_UpdateRecord(Id, Rank, Name);
+							}
+							else
+							{
+								cout << "\nThe id you entered doesn't exist\n";
+							}
 
 							break;
 						}
 						case 'C':
 						{
+							int Id;
 
+							cout << "Enter the id of the officer that you want to delete: ";
+							cin >> Id;
+
+							if (Officers.P_IdExists(Id))
+							{
+								Officers.P_Delete(Id);
+								cout << "\nRecord against the entered id has been successfully deleted\n";
+							}
+							else
+							{
+								cout << "\nThe record that you want to delete doesn't exist\n";
+							}
 
 							break;
 						}
