@@ -59,11 +59,13 @@ int main()
 					{
 						case 'A':
 						{
-							cout << "Enter the rank of the officer that you want to enter: ";
+							cout << "\nEnter the rank of the officer that you want to enter: ";
 							cin >> Rank;
 
-							cout << "Enter the name of the officer that you want to enter: ";
-							cin >> Name;
+							cin.ignore();
+
+							cout << "\nEnter the name of the officer that you want to enter: ";
+							getline(cin, Name);
 
 							if (Officers->P_LimitReached())
 							{
@@ -134,8 +136,10 @@ int main()
 								cout << "Enter the new rank of the officer: ";
 								cin >> Rank;
 
+								cin.ignore();
+
 								cout << "Enter the updated name of the officer: ";
-								cin >> Name;
+								getline(cin, Name);
 
 								Officers->P_UpdateRecord(Id, Rank, Name);
 							}
@@ -223,11 +227,13 @@ int main()
 					{
 						case 'A':
 						{
+							cin.ignore();
+
 							cout << "Enter the description of the fir that you want to enter: ";
-							cin >> ComplaintDescription;
+							getline(cin, ComplaintDescription);
 
 							cout << "Enter the name of the person who has launched the fir: ";
-							cin >> ComplaintBy;
+							getline(cin, ComplaintBy);
 
 							if (Firs->F_LimitReached())
 							{
@@ -295,11 +301,13 @@ int main()
 							{
 								Firs->F_Search(Id);
 
+								cin.ignore();
+
 								cout << "Enter the new description of the fir: ";
-								cin >> ComplaintDescription;
+								getline(cin, ComplaintDescription);
 
 								cout << "Enter the updated name of the person who launched the fir: ";
-								cin >> ComplaintBy;
+								getline(cin, ComplaintBy);
 
 								Firs->F_UpdateRecord(Id, ComplaintDescription, ComplaintBy);
 							}
@@ -388,11 +396,13 @@ int main()
 					{
 						case 'A':
 						{
+							cin.ignore();
+
 							cout << "Enter the offense of the criminal that you want to enter: ";
-							cin >> Offense;
+							getline(cin, Offense);
 
 							cout << "Enter the name of the criminal that you want to enter: ";
-							cin >> Name;
+							getline(cin, Name);
 
 							if (Criminals->C_LimitReached())
 							{
@@ -460,11 +470,13 @@ int main()
 							{
 								Criminals->C_Search(Id);
 
+								cin.ignore();
+
 								cout << "Enter the new offense of the criminal: ";
-								cin >> Offense;
+								getline(cin, Offense);
 
 								cout << "Enter the updated name of the criminal: ";
-								cin >> Name;
+								getline(cin, Name);
 
 								Criminals->C_UpdateRecord(Id, Offense, Name);
 							}

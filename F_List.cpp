@@ -408,7 +408,7 @@ void F_List::F_Update()
 
 bool F_List::F_IdExists(int Id1)
 {
-	if (Id1 < ArrSize && Id1 > 0 && Arr[Id1] != nullptr)
+	if (Id1 < ArrSize && Id1 >= 0 && Arr[Id1] != nullptr)
 	{
 		return true;
 	}
@@ -428,9 +428,9 @@ void F_List::F_UpdateRecord(int Id1, string ComplaintDescription1, string Compla
 void F_List::F_Search(int Id1)
 {
 	cout << "\nRecord found:\n";
-	cout << "ID: " << Arr[Id1] << endl;
-	cout << "Complaint Description:" << Arr[Id1] << endl;
-	cout << "Complaint By: " << Arr[Id1] << endl;
+	cout << "ID: " << Arr[Id1]->Id << endl;
+	cout << "Complaint Description:" << Arr[Id1]->ComplaintDescription << endl;
+	cout << "Complaint By: " << Arr[Id1]->ComplaintBy << endl;
 }
 
 bool F_List::F_IsDeletedEmpty()

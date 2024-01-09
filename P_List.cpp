@@ -408,7 +408,7 @@ void P_List::P_Update()
 
 bool P_List::P_IdExists(int Id1)
 {
-	if (Id1 < ArrSize && Id1 > 0 && Arr[Id1] != nullptr)
+	if (Id1 < ArrSize && Id1 >= 0 && Arr[Id1] != nullptr)
 	{
 		return true;
 	}
@@ -428,9 +428,9 @@ void P_List::P_UpdateRecord(int Id1, int Rank1, string Name1)
 void P_List::P_Search(int Id1)
 {
 	cout << "\nRecord found:\n";
-	cout << "ID: " << Arr[Id1] << endl;
-	cout << "Rank:" << Arr[Id1] << endl;
-	cout << "Name: " << Arr[Id1] << endl;
+	cout << "ID: " << Arr[Id1]->Id << endl;
+	cout << "Rank:" << Arr[Id1]->Rank << endl;
+	cout << "Name: " << Arr[Id1]->Name << endl;
 }
 
 bool P_List::P_IsDeletedEmpty()

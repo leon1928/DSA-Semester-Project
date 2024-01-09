@@ -408,7 +408,7 @@ void C_List::C_Update()
 
 bool C_List::C_IdExists(int Id1)
 {
-	if (Id1 < ArrSize && Id1 > 0 && Arr[Id1] != nullptr)
+	if (Id1 < ArrSize && Id1 >= 0 && Arr[Id1] != nullptr)
 	{
 		return true;
 	}
@@ -428,9 +428,9 @@ void C_List::C_UpdateRecord(int Id1, string Offense1, string Name1)
 void C_List::C_Search(int Id1)
 {
 	cout << "\nRecord found:\n";
-	cout << "ID: " << Arr[Id1] << endl;
-	cout << "Offense:" << Arr[Id1] << endl;
-	cout << "Name: " << Arr[Id1] << endl;
+	cout << "ID: " << Arr[Id1]->Id << endl;
+	cout << "Offense:" << Arr[Id1]->Offense << endl;
+	cout << "Name: " << Arr[Id1]->Name << endl;
 }
 
 bool C_List::C_IsDeletedEmpty()
