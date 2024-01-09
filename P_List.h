@@ -30,5 +30,4 @@ class P_List
 		bool P_IsDeletedEmpty();
 		void P_Search(int Id1);
 		int P_GetDeletedId();
-		void Size();
 };

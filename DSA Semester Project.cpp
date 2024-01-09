@@ -8,9 +8,18 @@ int main()
 {
 	char MainChoice;
 
-	P_List Officers;
+	P_List* Officers = new P_List;
+	C_List* Criminals = new C_List;
+	F_List* Firs = new F_List;
+
+
 	stack <int> P_LastEntered;
+	stack <int> C_LastEntered;
+	stack <int> F_LastEntered;
+
 	int P_Id{ 0 };
+	int C_Id{ 0 };
+	int F_Id{ 0 };
 
 	do
 	{
@@ -30,13 +39,11 @@ int main()
 			case 'P':
 			{
 				char P_Choice;
+				int Rank;
+				string Name;
 
 				do
 				{
-					//int Id;
-					int Rank;
-					string Name;
-
 					cout << "\nSelect one of the options from below to proceed:\n";
 					cout << "(A) to add a new officer\n";
 					cout << "(B) to update the record of an existing officer\n";
@@ -58,7 +65,7 @@ int main()
 							cout << "Enter the name of the officer that you want to enter: ";
 							cin >> Name;
 
-							if (Officers.P_LimitReached())
+							if (Officers->P_LimitReached())
 							{
 								char UpdateChoice;
 
@@ -69,11 +76,11 @@ int main()
 
 								if (UpdateChoice == 'Y')
 								{
-									Officers.P_Update();
+									Officers->P_Update();
 
-									if (Officers.P_IsDeletedEmpty())
+									if (Officers->P_IsDeletedEmpty())
 									{
-										Officers.P_Add(P_Id, Rank, Name);
+										Officers->P_Add(P_Id, Rank, Name);
 										P_LastEntered.push(P_Id);
 
 										cout << "\nRecord entered successfully, Id assigned to this officer is: " << P_Id << endl;
@@ -82,9 +89,9 @@ int main()
 									}
 									else
 									{
-										Officers.P_Add(Officers.P_GetDeletedId(), Rank, Name);
+										Officers->P_Add(Officers->P_GetDeletedId(), Rank, Name);
 										P_LastEntered.push(P_Id);
-										cout << "\nRecord entered successfully, Id assigned to this officer is: " << Officers.P_GetDeletedId() << endl;
+										cout << "\nRecord entered successfully, Id assigned to this officer is: " << Officers->P_GetDeletedId() << endl;
 									}
 								}
 								else
@@ -96,9 +103,9 @@ int main()
 							}
 							else
 							{
-								if (Officers.P_IsDeletedEmpty())
+								if (Officers->P_IsDeletedEmpty())
 								{
-									Officers.P_Add(P_Id, Rank, Name);
+									Officers->P_Add(P_Id, Rank, Name);
 									P_LastEntered.push(P_Id);
 
 									cout << "Record entered successfully, Id assigned to this officer is: " << P_Id;
@@ -107,7 +114,7 @@ int main()
 								}
 								else
 								{
-									Officers.P_Add(Officers.P_GetDeletedId(), Rank, Name);
+									Officers->P_Add(Officers->P_GetDeletedId(), Rank, Name);
 								}
 							}
 
@@ -116,15 +123,13 @@ int main()
 						case 'B':
 						{
 							int Id;
-							int Rank;
-							string Name;
 
 							cout << "Entet the id of the officer that you want to update: ";
 							cin >> Id;
 
-							if (Officers.P_IdExists(Id))
+							if (Officers->P_IdExists(Id))
 							{
-								Officers.P_Search(Id);
+								Officers->P_Search(Id);
 
 								cout << "Enter the new rank of the officer: ";
 								cin >> Rank;
@@ -132,7 +137,7 @@ int main()
 								cout << "Enter the updated name of the officer: ";
 								cin >> Name;
 
-								Officers.P_UpdateRecord(Id, Rank, Name);
+								Officers->P_UpdateRecord(Id, Rank, Name);
 							}
 							else
 							{
@@ -148,9 +153,9 @@ int main()
 							cout << "Enter the id of the officer that you want to delete: ";
 							cin >> Id;
 
-							if (Officers.P_IdExists(Id))
+							if (Officers->P_IdExists(Id))
 							{
-								Officers.P_Delete(Id);
+								Officers->P_Delete(Id);
 								cout << "\nRecord against the entered id has been successfully deleted\n";
 							}
 							else
@@ -162,7 +167,19 @@ int main()
 						}
 						case 'D':
 						{
+							int Id;
 
+							cout << "Enter the id of the officer that you want to find: ";
+							cin >> Id;
+
+							if (Officers->P_IdExists(Id))
+							{
+								Officers->P_Search(Id);
+							}
+							else
+							{
+								cout << "\nOfficer not found\n";
+							}
 
 							break;
 						}
@@ -186,6 +203,8 @@ int main()
 			case 'F':
 			{
 				char F_Choice;
+				string ComplaintDescription;
+				string ComplaintBy;
 
 				do
 				{
@@ -204,25 +223,127 @@ int main()
 					{
 						case 'A':
 						{
+							cout << "Enter the description of the fir that you want to enter: ";
+							cin >> ComplaintDescription;
 
+							cout << "Enter the name of the person who has launched the fir: ";
+							cin >> ComplaintBy;
+
+							if (Firs->F_LimitReached())
+							{
+								char UpdateChoice;
+
+								cout << "There's no more space to enter more records\n";
+								cout << "Would you like to update system to support more entries? (Y/N): ";
+								cout << "You choice: ";
+								cin >> UpdateChoice;
+
+								if (UpdateChoice == 'Y')
+								{
+									Firs->F_Update();
+
+									if (Firs->F_IsDeletedEmpty())
+									{
+										Firs->F_Add(F_Id, ComplaintDescription, ComplaintBy);
+										F_LastEntered.push(F_Id);
+
+										cout << "\nRecord entered successfully, Id assigned to this fir is: " << F_Id << endl;
+
+										F_Id++;
+									}
+									else
+									{
+										Firs->F_Add(Firs->F_GetDeletedId(), ComplaintDescription, ComplaintBy);
+										F_LastEntered.push(F_Id);
+										cout << "\nRecord entered successfully, Id assigned to this fir is: " << Firs->F_GetDeletedId() << endl;
+									}
+								}
+								else
+								{
+									cout << "\nRecord not added\n";
+									cout << "You need to update the system to add more entires\n";
+								}
+
+							}
+							else
+							{
+								if (Firs->F_IsDeletedEmpty())
+								{
+									Firs->F_Add(F_Id, ComplaintDescription, ComplaintBy);
+									F_LastEntered.push(F_Id);
+
+									cout << "Record entered successfully, Id assigned to this fir is: " << F_Id;
+
+									F_Id++;
+								}
+								else
+								{
+									Firs->F_Add(Firs->F_GetDeletedId(), ComplaintDescription, ComplaintBy);
+								}
+							}
 
 							break;
 						}
 						case 'B':
 						{
+							int Id;
 
+							cout << "Entet the id of the fir that you want to update: ";
+							cin >> Id;
+
+							if (Firs->F_IdExists(Id))
+							{
+								Firs->F_Search(Id);
+
+								cout << "Enter the new description of the fir: ";
+								cin >> ComplaintDescription;
+
+								cout << "Enter the updated name of the person who launched the fir: ";
+								cin >> ComplaintBy;
+
+								Firs->F_UpdateRecord(Id, ComplaintDescription, ComplaintBy);
+							}
+							else
+							{
+								cout << "\nThe id you entered doesn't exist\n";
+							}
 
 							break;
 						}
 						case 'C':
 						{
+							int Id;
 
+							cout << "Enter the id of the fir that you want to delete: ";
+							cin >> Id;
+
+							if (Firs->F_IdExists(Id))
+							{
+								Firs->F_Delete(Id);
+								cout << "\nRecord against the entered id has been successfully deleted\n";
+							}
+							else
+							{
+								cout << "\nThe record that you want to delete doesn't exist\n";
+							}
 
 							break;
 						}
 						case 'D':
 						{
+							int Id;
 
+							cout << "Enter the id of the fir that you want to find: ";
+							cin >> Id;
+
+							if (Firs->F_IdExists(Id))
+							{
+								Firs->F_Search(Id);
+							}
+							else
+							{
+								cout << "\nfir not found\n";
+							}
 
 							break;
 						}
@@ -247,6 +368,8 @@ int main()
 			case 'C':
 			{
 				char C_Choice;
+				string Offense;
+				string Name;
 
 				do
 				{
@@ -265,25 +388,127 @@ int main()
 					{
 						case 'A':
 						{
+							cout << "Enter the offense of the criminal that you want to enter: ";
+							cin >> Offense;
 
+							cout << "Enter the name of the criminal that you want to enter: ";
+							cin >> Name;
+
+							if (Criminals->C_LimitReached())
+							{
+								char UpdateChoice;
+
+								cout << "There's no more space to enter more records\n";
+								cout << "Would you like to update system to support more entries? (Y/N): ";
+								cout << "You choice: ";
+								cin >> UpdateChoice;
+
+								if (UpdateChoice == 'Y')
+								{
+									Criminals->C_Update();
+
+									if (Criminals->C_IsDeletedEmpty())
+									{
+										Criminals->C_Add(C_Id, Offense, Name);
+										C_LastEntered.push(C_Id);
+
+										cout << "\nRecord entered successfully, Id assigned to this criminal is: " << C_Id << endl;
+
+										C_Id++;
+									}
+									else
+									{
+										Criminals->C_Add(Criminals->C_GetDeletedId(), Offense, Name);
+										C_LastEntered.push(C_Id);
+										cout << "\nRecord entered successfully, Id assigned to this criminal is: " << Criminals->C_GetDeletedId() << endl;
+									}
+								}
+								else
+								{
+									cout << "\nRecord not added\n";
+									cout << "You need to update the system to add more entires\n";
+								}
+
+							}
+							else
+							{
+								if (Criminals->C_IsDeletedEmpty())
+								{
+									Criminals->C_Add(C_Id, Offense, Name);
+									C_LastEntered.push(C_Id);
+
+									cout << "Record entered successfully, Id assigned to this criminal is: " << C_Id;
+
+									C_Id++;
+								}
+								else
+								{
+									Criminals->C_Add(Criminals->C_GetDeletedId(), Offense, Name);
+								}
+							}
 
 							break;
 						}
 						case 'B':
 						{
+							int Id;
 
+							cout << "Entet the id of the criminal that you want to update: ";
+							cin >> Id;
+
+							if (Criminals->C_IdExists(Id))
+							{
+								Criminals->C_Search(Id);
+
+								cout << "Enter the new offense of the criminal: ";
+								cin >> Offense;
+
+								cout << "Enter the updated name of the criminal: ";
+								cin >> Name;
+
+								Criminals->C_UpdateRecord(Id, Offense, Name);
+							}
+							else
+							{
+								cout << "\nThe id you entered doesn't exist\n";
+							}
 
 							break;
 						}
 						case 'C':
 						{
+							int Id;
 
+							cout << "Enter the id of the criminal that you want to delete: ";
+							cin >> Id;
+
+							if (Criminals->C_IdExists(Id))
+							{
+								Criminals->C_Delete(Id);
+								cout << "\nRecord against the entered id has been successfully deleted\n";
+							}
+							else
+							{
+								cout << "\nThe record that you want to delete doesn't exist\n";
+							}
 
 							break;
 						}
 						case 'D':
 						{
+							int Id;
 
+							cout << "Enter the id of the criminal that you want to find: ";
+							cin >> Id;
+
+							if (Criminals->C_IdExists(Id))
+							{
+								Criminals->C_Search(Id);
+							}
+							else
+							{
+								cout << "\nOfficer not found\n";
+							}
 
 							break;
 						}

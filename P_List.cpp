@@ -444,8 +444,3 @@ int P_List::P_GetDeletedId()
 	Deleted.pop();
 	return Temp;
 }
-
-void P_List::Size()
-{
-	cout << sizeof(Arr);
-}

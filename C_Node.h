@@ -7,7 +7,7 @@ class C_Node
 {
 	public:
 		int Id;
-		int Rank;
+		string Offense;
 		string Name;
 		C_Node* Left;
 		C_Node* Right;
