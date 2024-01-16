@@ -444,3 +444,33 @@ int P_List::P_GetDeletedId()
 	Deleted.pop();
 	return Temp;
 }
+
+void P_List::P_SearchBST(int Id1)
+{
+	List = Root;
+
+	a:
+	if (Id1 == List->Id)
+	{
+		cout << "\nRecord found: ";
+		cout << "Id: " << List->Id << endl;
+		cout << "Rank: " << List->Rank << endl;
+		cout << "Name: " << List->Name << endl;
+	}
+	else if (Id1 > List->Id && List->Right != nullptr)
+	{
+		cout << "\nHere1\n";
+		List = List->Right;
+		goto a;
+	}
+	else if (Id1 < List->Id && List->Left != nullptr)
+	{
+		cout << "\nHere2\n";
+		List = List->Left;
+		goto a;
+	}
+	else
+	{
+		cout << "\nSomething went wrong, This wasn't supposed to happen\n";
+	}
+}

@@ -2,6 +2,22 @@
 #include "C_List.h"
 #include "F_List.h"
 
+/*long long Time()
+{
+	//time_t Ctime = time(nullptr);
+	//cout << Ctime << endl;
+	// Get the current time point
+	auto currentTimePoint = std::chrono::system_clock::now();
+
+	// Convert the time point to milliseconds since the epoch
+	auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(currentTimePoint.time_since_epoch());
+
+	// Display the current time in milliseconds
+	//std::cout << "Current time in milliseconds since the epoch: " << duration.count() << std::endl;
+
+	return duration.count();
+}*/
+
 using namespace std;
 
 int main()
@@ -12,7 +28,6 @@ int main()
 	C_List* Criminals = new C_List;
 	F_List* Firs = new F_List;
 
-
 	stack <int> P_LastEntered;
 	stack <int> C_LastEntered;
 	stack <int> F_LastEntered;
@@ -20,6 +35,15 @@ int main()
 	int P_Id{ 0 };
 	int C_Id{ 0 };
 	int F_Id{ 0 };
+
+	//Time();
+
+	//long long Time1 = Time();
+	//long long Time2 = Time();
+	//long long ResultantTime = Time2 - Time1;
+
+	//cout << ResultantTime;
+
 
 	do
 	{
@@ -67,6 +91,8 @@ int main()
 							cout << "\nEnter the name of the officer that you want to enter: ";
 							getline(cin, Name);
 
+							auto start = std::chrono::high_resolution_clock::now();
+
 							if (Officers->P_LimitReached())
 							{
 								char UpdateChoice;
@@ -75,6 +101,8 @@ int main()
 								cout << "Would you like to update system to support more entries? (Y/N): ";
 								cout << "You choice: ";
 								cin >> UpdateChoice;
+
+								UpdateChoice = toupper(UpdateChoice);
 
 								if (UpdateChoice == 'Y')
 								{
@@ -119,6 +147,12 @@ int main()
 									Officers->P_Add(Officers->P_GetDeletedId(), Rank, Name);
 								}
 							}
+
+							auto stop = std::chrono::high_resolution_clock::now();
+
+							auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(stop - start);
+
+							std::cout << "\nElapsed time: " << duration.count() << " nanoseconds" << std::endl;
 
 							break;
 						}
@@ -178,7 +212,31 @@ int main()
 
 							if (Officers->P_IdExists(Id))
 							{
+								
+								cout << "\nSearching by array:\n";
+								auto start = std::chrono::high_resolution_clock::now();
 								Officers->P_Search(Id);
+
+								auto stop = std::chrono::high_resolution_clock::now();
+
+								auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(stop - start);
+
+								double seconds = duration.count() * 1e-9;
+
+								std::cout << "\nElapsed time for array: " << seconds << " nanoseconds" << std::endl;
+
+								//BST
+								auto start1 = std::chrono::high_resolution_clock::now();
+
+								Officers->P_SearchBST(Id);
+
+								auto stop1 = std::chrono::high_resolution_clock::now();
+
+								auto duration1 = std::chrono::duration_cast<std::chrono::nanoseconds>(stop1 - start1);
+
+								double seconds1 = duration1.count() * 1e-9;
+
+								std::cout << "\nElapsed time for BST: " << seconds1 << " nanoseconds" << std::endl;
 							}
 							else
 							{
@@ -243,6 +301,8 @@ int main()
 								cout << "Would you like to update system to support more entries? (Y/N): ";
 								cout << "You choice: ";
 								cin >> UpdateChoice;
+
+								UpdateChoice = toupper(UpdateChoice);
 
 								if (UpdateChoice == 'Y')
 								{
@@ -412,6 +472,8 @@ int main()
 								cout << "Would you like to update system to support more entries? (Y/N): ";
 								cout << "You choice: ";
 								cin >> UpdateChoice;
+
+								UpdateChoice = toupper(UpdateChoice);
 
 								if (UpdateChoice == 'Y')
 								{
