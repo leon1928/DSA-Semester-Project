@@ -6,3 +6,5 @@
 #include <cctype>
 #include <ctime>
 #include <chrono>
+#include <conio.h>
+#include <windows.h>

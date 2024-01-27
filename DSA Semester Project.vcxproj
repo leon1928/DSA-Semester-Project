@@ -134,6 +134,7 @@
     <ClCompile Include="F_Node.cpp" />
     <ClCompile Include="P_Node.cpp" />
     <ClCompile Include="P_List.cpp" />
+    <ClCompile Include="SystemAdmin.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C_List.h" />
@@ -144,6 +145,7 @@
     <ClInclude Include="Libraries.h" />
     <ClInclude Include="P_Node.h" />
     <ClInclude Include="P_List.h" />
+    <ClInclude Include="SystemAdmin.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

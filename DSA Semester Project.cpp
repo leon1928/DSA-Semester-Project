@@ -2,27 +2,20 @@
 #include "C_List.h"
 #include "F_List.h"
 
-/*long long Time()
-{
-	//time_t Ctime = time(nullptr);
-	//cout << Ctime << endl;
-	// Get the current time point
-	auto currentTimePoint = std::chrono::system_clock::now();
-
-	// Convert the time point to milliseconds since the epoch
-	auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(currentTimePoint.time_since_epoch());
-
-	// Display the current time in milliseconds
-	//std::cout << "Current time in milliseconds since the epoch: " << duration.count() << std::endl;
-
-	return duration.count();
-}*/
-
 using namespace std;
 
 int main()
 {
-	char MainChoice;
+	char MainChoice{' '};
+
+	//char UserType;
+
+	bool IsAdmin{ false };
+
+	string UserPassword{""};
+	string SystemAdminPassword{ "BigManIsHere" };
+
+	char ch;
 
 	P_List* Officers = new P_List;
 	C_List* Criminals = new C_List;
@@ -36,25 +29,52 @@ int main()
 	int C_Id{ 0 };
 	int F_Id{ 0 };
 
-	//Time();
-
-	//long long Time1 = Time();
-	//long long Time2 = Time();
-	//long long ResultantTime = Time2 - Time1;
-
-	//cout << ResultantTime;
-
-
 	do
 	{
-		cout << "\nWELCOME TO POLICE MANAGEMENT SYSTEM\n\n";
-		cout << "Select one of options from below to proceed\n";
+		cout << "********************************************************\n";
+		cout << "\tWELCOME TO POLICE MANAGEMENT SYSTEM\n";
+		cout << "********************************************************\n\n";
+
+		cout << "Are you an admin? (Y/N):";
+		cout << "\nYour choice: ";
+
+		MainChoice = _getch();
+
+		cout << MainChoice << endl;
+
+		MainChoice = toupper(MainChoice);
+
+		if (MainChoice == 'Y')
+		{
+			cout << "\nEnter the admin password: ";
+			// 13 is the ASCII code for Enter
+			while ((ch = _getch()) != 13) 
+			{
+				// Display '*' for each character
+				cout << '*';
+				UserPassword = UserPassword + ch;
+			}
+
+			if (UserPassword == SystemAdminPassword)
+			{
+				IsAdmin = true;
+				cout << "\nAdmin login detected\n";
+			}
+			else
+			{
+				cout << "\nIncorrect password, logged in as guest\n";
+			}
+
+		}
+
+		cout << "\nSelect one of options from below to proceed\n";
 		cout << "(P) to perform actions related to police officers\n";
 		cout << "(F) to perform actions related to fir's\n";
 		cout << "(C) to perform actions related to criminals\n";
 		cout << "(E) to exit\n";
 		cout << "Your choice: ";
-		cin >> MainChoice;
+		MainChoice = _getch();
+		cout << MainChoice << endl;
 
 		MainChoice = toupper(MainChoice);
 
@@ -68,6 +88,7 @@ int main()
 
 				do
 				{
+					P:
 					cout << "\nSelect one of the options from below to proceed:\n";
 					cout << "(A) to add a new officer\n";
 					cout << "(B) to update the record of an existing officer\n";
@@ -75,9 +96,30 @@ int main()
 					cout << "(D) to search for an officer in the list\n";
 					cout << "(E) to go back to the main menu\n";
 					cout << "Your choice: ";
-					cin >> P_Choice;
+					P_Choice = _getch();
+					cout << P_Choice << endl;
 
 					P_Choice = toupper(P_Choice);
+
+					if ((P_Choice == 'A' || P_Choice == 'B' || P_Choice == 'C') && !IsAdmin)
+					{
+						char Again{ ' ' };
+						cout << "\nOnly admins can perform this function\n";
+						cout << "Would you like to try again? (Y/N)\n";
+						cout << "Your choice: ";
+						Again = _getch();
+
+						Again = toupper(Again);
+
+						if (Again == 'Y')
+						{
+							goto P;
+						}
+						else
+						{
+							P_Choice = 'E';
+						}
+					}
 
 					switch (P_Choice)
 					{
@@ -91,7 +133,7 @@ int main()
 							cout << "\nEnter the name of the officer that you want to enter: ";
 							getline(cin, Name);
 
-							auto start = std::chrono::high_resolution_clock::now();
+							//auto start = std::chrono::high_resolution_clock::now();
 
 							if (Officers->P_LimitReached())
 							{
@@ -100,7 +142,8 @@ int main()
 								cout << "There's no more space to enter more records\n";
 								cout << "Would you like to update system to support more entries? (Y/N): ";
 								cout << "You choice: ";
-								cin >> UpdateChoice;
+								UpdateChoice = _getch();
+								cout << UpdateChoice << endl;
 
 								UpdateChoice = toupper(UpdateChoice);
 
@@ -148,11 +191,11 @@ int main()
 								}
 							}
 
-							auto stop = std::chrono::high_resolution_clock::now();
+							/*auto stop = std::chrono::high_resolution_clock::now();
 
 							auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(stop - start);
 
-							std::cout << "\nElapsed time: " << duration.count() << " nanoseconds" << std::endl;
+							std::cout << "\nElapsed time: " << duration.count() << " nanoseconds" << std::endl;*/
 
 							break;
 						}
@@ -214,29 +257,29 @@ int main()
 							{
 								
 								cout << "\nSearching by array:\n";
-								auto start = std::chrono::high_resolution_clock::now();
+								//auto start = std::chrono::high_resolution_clock::now();
 								Officers->P_Search(Id);
 
-								auto stop = std::chrono::high_resolution_clock::now();
+								/*auto stop = std::chrono::high_resolution_clock::now();
 
 								auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(stop - start);
 
 								double seconds = duration.count() * 1e-9;
 
-								std::cout << "\nElapsed time for array: " << seconds << " nanoseconds" << std::endl;
+								std::cout << "\nElapsed time for array: " << seconds << " nanoseconds" << std::endl;*/
 
 								//BST
-								auto start1 = std::chrono::high_resolution_clock::now();
+								//auto start1 = std::chrono::high_resolution_clock::now();
 
-								Officers->P_SearchBST(Id);
+								//Officers->P_SearchBST(Id);
 
-								auto stop1 = std::chrono::high_resolution_clock::now();
+								/*auto stop1 = std::chrono::high_resolution_clock::now();
 
 								auto duration1 = std::chrono::duration_cast<std::chrono::nanoseconds>(stop1 - start1);
 
 								double seconds1 = duration1.count() * 1e-9;
 
-								std::cout << "\nElapsed time for BST: " << seconds1 << " nanoseconds" << std::endl;
+								std::cout << "\nElapsed time for BST: " << seconds1 << " nanoseconds" << std::endl;*/
 							}
 							else
 							{
@@ -270,6 +313,7 @@ int main()
 
 				do
 				{
+					F:
 					cout << "\nSelect one of the options from below to proceed:\n";
 					cout << "(A) to add a new Fir\n";
 					cout << "(B) to update the record of an existing Fir\n";
@@ -277,9 +321,30 @@ int main()
 					cout << "(D) to search for a fir in the list\n";
 					cout << "(E) to go back to the main menu\n";
 					cout << "Your choice: ";
-					cin >> F_Choice;
+					F_Choice = _getch();
+					cout << F_Choice << endl;
 
 					F_Choice = toupper(F_Choice);
+
+					if ((F_Choice == 'A' || F_Choice == 'B' || F_Choice == 'C') && !IsAdmin)
+					{
+						char Again{ ' ' };
+						cout << "\nOnly admins can perform this function\n";
+						cout << "Would you like to try again? (Y/N)\n";
+						cout << "Your choice: ";
+						Again = _getch();
+
+						Again = toupper(Again);
+
+						if (Again == 'Y')
+						{
+							goto F;
+						}
+						else
+						{
+							F_Choice = 'E';
+						}
+					}
 
 					switch (F_Choice)
 					{
@@ -300,7 +365,8 @@ int main()
 								cout << "There's no more space to enter more records\n";
 								cout << "Would you like to update system to support more entries? (Y/N): ";
 								cout << "You choice: ";
-								cin >> UpdateChoice;
+								UpdateChoice = _getch();
+								cout << UpdateChoice << endl;
 
 								UpdateChoice = toupper(UpdateChoice);
 
@@ -441,6 +507,7 @@ int main()
 
 				do
 				{
+					C:
 					cout << "\nSelect one of the options from below to proceed:\n";
 					cout << "(A) to add a new criminal\n";
 					cout << "(B) to update the record of an existing criminal\n";
@@ -448,9 +515,30 @@ int main()
 					cout << "(D) to search for a criminal in the list\n";
 					cout << "(E) to go back to the main menu\n";
 					cout << "Your choice: ";
-					cin >> C_Choice;
+					C_Choice = _getch();
+					cout << C_Choice << endl;
 
 					C_Choice = toupper(C_Choice);
+
+					if ((C_Choice == 'A' || C_Choice == 'B' || C_Choice == 'C') && !IsAdmin)
+					{
+						char Again{ ' ' };
+						cout << "\nOnly admins can perform this function\n";
+						cout << "Would you like to try again? (Y/N)\n";
+						cout << "Your choice: ";
+						Again = _getch();
+
+						Again = toupper(Again);
+
+						if (Again == 'Y')
+						{
+							goto C;
+						}
+						else
+						{
+							C_Choice = 'E';
+						}
+					}
 
 					switch (C_Choice)
 					{
@@ -471,7 +559,8 @@ int main()
 								cout << "There's no more space to enter more records\n";
 								cout << "Would you like to update system to support more entries? (Y/N): ";
 								cout << "You choice: ";
-								cin >> UpdateChoice;
+								UpdateChoice = _getch();
+								cout << UpdateChoice << endl;
 
 								UpdateChoice = toupper(UpdateChoice);
 
