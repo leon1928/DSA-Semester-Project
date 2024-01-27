@@ -1,6 +1,7 @@
 #include "P_List.h"
 #include "C_List.h"
 #include "F_List.h"
+#include "SystemAdmin.h"
 
 using namespace std;
 
@@ -8,12 +9,11 @@ int main()
 {
 	char MainChoice{' '};
 
-	//char UserType;
-
 	bool IsAdmin{ false };
 
 	string UserPassword{""};
-	string SystemAdminPassword{ "BigManIsHere" };
+
+	SystemAdmin* Admins = new SystemAdmin;
 
 	char ch;
 
@@ -65,7 +65,7 @@ int main()
 				}
 			}
 
-			if (UserPassword == SystemAdminPassword)
+			if (Admins->PasswordExists(UserPassword))
 			{
 				IsAdmin = true;
 				cout << "\nAdmin login detected\n";
