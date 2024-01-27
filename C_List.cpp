@@ -107,120 +107,19 @@ void C_List::C_Delete(int Id1)
 		List = Arr[Id1];
 
 		C_Node* Temp = List;
-		//cout << List->Previous << endl;
-		List = List->Previous;
-		Temp->Previous = nullptr; //Just to make sure the delete keyword doesn't delete everything in the previous as well
 
-		if (Temp->Left == nullptr && Temp->Right == nullptr)	//case where the nodes both left and right are null
+		if (List != Root)
 		{
-			if (List->Left != nullptr)
-			{
-				if (Id1 == List->Left->Id)	//error to be resolved (crashes code as the condition tries to check left id even if it doesn't exist)
-				{
-					List->Left = nullptr;
-					delete Temp;
-				}
-			}
-			else if (List->Right != nullptr)
-			{
-				if (Id1 == List->Right->Id)
-				{
-					List->Right = nullptr;
-					delete Temp;
-				}
-			}
-			else
-			{
-				cout << "Something went wrong, Hi from line 124 of C_List.cpp\n";
-			}
-		}
-		else if (Temp->Left != nullptr && Temp->Right == nullptr)	//case where the node has a left and the right is null
-		{
-			if (List->Left != nullptr)
-			{
-				if (Id1 == List->Left->Id)
-				{
-					List->Left = Temp->Left;
-					Temp->Left->Previous = List;
-					Temp->Left = nullptr;
-					delete Temp;
-				}
-			}
-			else if (List->Right != nullptr)
-			{
-				if (Id1 == List->Right->Id)
-				{
-					List->Right = Temp->Left;
-					Temp->Left->Previous = List;
-					Temp->Left = nullptr;
-					delete Temp;
-				}
-			}
-			else
-			{
-				cout << "Something went wrong, Hi from line 145 of C_List.cpp\n";
-			}
-		}
-		else if (Temp->Right != nullptr && Temp->Left == nullptr)	//case where the node has a right and left is null
-		{
-			if (List->Left != nullptr)
-			{
-				if (Id1 == List->Left->Id)
-				{
-					List->Left = Temp->Right;
-					Temp->Right->Previous = List;
-					Temp->Right = nullptr;
-					delete Temp;
-				}
-			}
-			else if (List->Right != nullptr)
-			{
-				if (Id1 == List->Right->Id)
-				{
-					List->Right = Temp->Right;
-					Temp->Right->Previous = List;
-					Temp->Right = nullptr;
-					delete Temp;
-				}
-			}
-			else
-			{
-				cout << "Something went wrong, Hi from line 166 of C_List.cpp\n";
-			}
-		}
-		else //case where the node that is to be deleted has a both left and right
-		{
-			C_Node* TempLeft = Temp->Left;
-			C_Node* TempRight = Temp->Right;
-			C_Node* TraverseRight = Temp->Right;
+			List = List->Previous;
+			Temp->Previous = nullptr; //Just to make sure the delete keyword doesn't delete everything in the previous as well
 
-			Temp->Left = nullptr;
-			Temp->Right = nullptr;
-
-			TempLeft->Previous = nullptr;
-			TempRight->Previous = nullptr;
-
-			TempRight->Previous = List;
-
-		b:
-			if (TempRight->Left == nullptr)
+			if (Temp->Left == nullptr && Temp->Right == nullptr)	//case where the nodes both left and right are null
 			{
-				TempRight->Left = TempLeft;
-				TempLeft->Previous = TempRight;
-
-				TempLeft = nullptr;
-				delete TempLeft;
-
-				//TempRight->Previous = List;
-
 				if (List->Left != nullptr)
 				{
-					if (Id1 == List->Left->Id)
+					if (Id1 == List->Left->Id)	//error to be resolved (crashes code as the condition tries to check left id even if it doesn't exist)
 					{
-						List->Left = TempRight;
-						TempRight->Previous = List;
-						TempRight = nullptr;
-						delete TempRight;
+						List->Left = nullptr;
 						delete Temp;
 					}
 				}
@@ -228,35 +127,24 @@ void C_List::C_Delete(int Id1)
 				{
 					if (Id1 == List->Right->Id)
 					{
-						List->Right = TempRight;
-						TempRight->Previous = List;
-						TempRight = nullptr;
-						delete TempRight;
+						List->Right = nullptr;
 						delete Temp;
 					}
 				}
 				else
 				{
-					cout << "Something went wrong, Hi from line 212 of C_List.cpp\n";
+					cout << "Something went wrong, Hi from line 124 of C_List.cpp\n";
 				}
-
 			}
-			else if (TempLeft->Id < TraverseRight->Left->Id && TempRight->Left->Left == nullptr)
+			else if (Temp->Left != nullptr && Temp->Right == nullptr)	//case where the node has a left and the right is null
 			{
-				TempRight->Left->Left = TempLeft;
-				TempLeft->Previous = TempRight->Left;
-
-				TempLeft = nullptr;
-				delete TempLeft;
-
 				if (List->Left != nullptr)
 				{
 					if (Id1 == List->Left->Id)
 					{
-						List->Left = TempRight;
-						TempRight->Previous = List;
-						TempRight = nullptr;
-						delete TempRight;
+						List->Left = Temp->Left;
+						Temp->Left->Previous = List;
+						Temp->Left = nullptr;
 						delete Temp;
 					}
 				}
@@ -264,34 +152,26 @@ void C_List::C_Delete(int Id1)
 				{
 					if (Id1 == List->Right->Id)
 					{
-						List->Right = TempRight;
-						TempRight->Previous = List;
-						TempRight = nullptr;
-						delete TempRight;
+						List->Right = Temp->Left;
+						Temp->Left->Previous = List;
+						Temp->Left = nullptr;
 						delete Temp;
 					}
 				}
 				else
 				{
-					cout << "Something went wrong, Hi from line 242 of C_List.cpp\n";
+					cout << "Something went wrong, Hi from line 145 of C_List.cpp\n";
 				}
 			}
-			else if (TempLeft->Id > TraverseRight->Left->Id && TempRight->Left->Right == nullptr)
+			else if (Temp->Right != nullptr && Temp->Left == nullptr)	//case where the node has a right and left is null
 			{
-				TempRight->Left->Right = TempLeft;
-				TempLeft->Previous = TempRight->Right;
-
-				TempLeft = nullptr;
-				delete TempLeft;
-
 				if (List->Left != nullptr)
 				{
 					if (Id1 == List->Left->Id)
 					{
-						List->Left = TempRight;
-						TempRight->Previous = List;
-						TempRight = nullptr;
-						delete TempRight;
+						List->Left = Temp->Right;
+						Temp->Right->Previous = List;
+						Temp->Right = nullptr;
 						delete Temp;
 					}
 				}
@@ -299,35 +179,163 @@ void C_List::C_Delete(int Id1)
 				{
 					if (Id1 == List->Right->Id)
 					{
-						List->Right = TempRight;
-						TempRight->Previous = List;
-						TempRight = nullptr;
-						delete TempRight;
+						List->Right = Temp->Right;
+						Temp->Right->Previous = List;
+						Temp->Right = nullptr;
 						delete Temp;
 					}
 				}
 				else
 				{
-					cout << "\nSomething went wrong, Hi from line 311 of C_List.cpp\n";
+					cout << "Something went wrong, Hi from line 166 of C_List.cpp\n";
 				}
 			}
-			else if (TempLeft->Id < TraverseRight->Left->Id && TempRight->Left->Left != nullptr)
+			else //case where the node that is to be deleted has a both left and right
 			{
-				TraverseRight = TraverseRight->Left->Left;
-				goto b;
+				C_Node* TempLeft = Temp->Left;
+				C_Node* TempRight = Temp->Right;
+				C_Node* TraverseRight = Temp->Right;
+
+				Temp->Left = nullptr;
+				Temp->Right = nullptr;
+
+				TempLeft->Previous = nullptr;
+				TempRight->Previous = nullptr;
+
+				TempRight->Previous = List;
+
+				b:
+				if (TempRight->Left == nullptr)
+				{
+					TempRight->Left = TempLeft;
+					TempLeft->Previous = TempRight;
+
+					TempLeft = nullptr;
+					delete TempLeft;
+
+					//TempRight->Previous = List;
+
+					if (List->Left != nullptr)
+					{
+						if (Id1 == List->Left->Id)
+						{
+							List->Left = TempRight;
+							TempRight->Previous = List;
+							TempRight = nullptr;
+							delete TempRight;
+							delete Temp;
+						}
+					}
+					else if (List->Right != nullptr)
+					{
+						if (Id1 == List->Right->Id)
+						{
+							List->Right = TempRight;
+							TempRight->Previous = List;
+							TempRight = nullptr;
+							delete TempRight;
+							delete Temp;
+						}
+					}
+					else
+					{
+						cout << "Something went wrong, Hi from line 212 of C_List.cpp\n";
+					}
+
+				}
+				else if (TempLeft->Id < TraverseRight->Left->Id && TempRight->Left->Left == nullptr)
+				{
+					TempRight->Left->Left = TempLeft;
+					TempLeft->Previous = TempRight->Left;
+
+					TempLeft = nullptr;
+					delete TempLeft;
+
+					if (List->Left != nullptr)
+					{
+						if (Id1 == List->Left->Id)
+						{
+							List->Left = TempRight;
+							TempRight->Previous = List;
+							TempRight = nullptr;
+							delete TempRight;
+							delete Temp;
+						}
+					}
+					else if (List->Right != nullptr)
+					{
+						if (Id1 == List->Right->Id)
+						{
+							List->Right = TempRight;
+							TempRight->Previous = List;
+							TempRight = nullptr;
+							delete TempRight;
+							delete Temp;
+						}
+					}
+					else
+					{
+						cout << "Something went wrong, Hi from line 242 of C_List.cpp\n";
+					}
+				}
+				else if (TempLeft->Id > TraverseRight->Left->Id && TempRight->Left->Right == nullptr)
+				{
+					TempRight->Left->Right = TempLeft;
+					TempLeft->Previous = TempRight->Right;
+
+					TempLeft = nullptr;
+					delete TempLeft;
+
+					if (List->Left != nullptr)
+					{
+						if (Id1 == List->Left->Id)
+						{
+							List->Left = TempRight;
+							TempRight->Previous = List;
+							TempRight = nullptr;
+							delete TempRight;
+							delete Temp;
+						}
+					}
+					else if (List->Right != nullptr)
+					{
+						if (Id1 == List->Right->Id)
+						{
+							List->Right = TempRight;
+							TempRight->Previous = List;
+							TempRight = nullptr;
+							delete TempRight;
+							delete Temp;
+						}
+					}
+					else
+					{
+						cout << "\nSomething went wrong, Hi from line 311 of C_List.cpp\n";
+					}
+				}
+				else if (TempLeft->Id < TraverseRight->Left->Id && TempRight->Left->Left != nullptr)
+				{
+					TraverseRight = TraverseRight->Left->Left;
+					goto b;
+				}
+				else if (TempLeft->Id > TraverseRight->Left->Id && TempRight->Left->Right != nullptr)
+				{
+					TraverseRight = TraverseRight->Left->Right;
+					goto b;
+				}
+				else
+				{
+					cout << "\nSomething went wrong, Hi from line 282 in C_List.cpp\n";
+				}
+				TraverseRight = nullptr;
+				delete TraverseRight;
 			}
-			else if (TempLeft->Id > TraverseRight->Left->Id && TempRight->Left->Right != nullptr)
-			{
-				TraverseRight = TraverseRight->Left->Right;
-				goto b;
-			}
-			else
-			{
-				cout << "\nSomething went wrong, Hi from line 282 in C_List.cpp\n";
-			}
-			TraverseRight = nullptr;
-			delete TraverseRight;
 		}
+		else
+		{
+			cout << "\nCan't do it chief, my developer is too lazy to implement the case the root element is to be deleted\n";
+		}
+
 		Arr[Id1] = nullptr;
 		Deleted.push(Id1);
 		EnteredElements--;
