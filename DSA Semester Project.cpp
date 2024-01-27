@@ -46,13 +46,23 @@ int main()
 
 		if (MainChoice == 'Y')
 		{
+			int TotalCharacters{ 0 };
 			cout << "\nEnter the admin password: ";
 			// 13 is the ASCII code for Enter
 			while ((ch = _getch()) != 13) 
 			{
-				// Display '*' for each character
-				cout << '*';
-				UserPassword = UserPassword + ch;
+				if (ch == 8)	//ASCII code for backspace
+				{
+					UserPassword.erase();	//removes the last entered character
+					cout << "\b" << " " << "\b";
+				}
+				else
+				{
+					// Display '*' for each character
+					cout << '*';
+					UserPassword = UserPassword + ch;
+					TotalCharacters++;
+				}
 			}
 
 			if (UserPassword == SystemAdminPassword)
