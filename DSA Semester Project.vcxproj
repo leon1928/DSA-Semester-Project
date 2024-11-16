@@ -127,24 +127,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="C_List.cpp" />
-    <ClCompile Include="C_Node.cpp" />
+    <ClCompile Include="Criminal.cpp" />
     <ClCompile Include="DSA Semester Project.cpp" />
-    <ClCompile Include="F_List.cpp" />
-    <ClCompile Include="F_Node.cpp" />
-    <ClCompile Include="P_Node.cpp" />
-    <ClCompile Include="P_List.cpp" />
+    <ClCompile Include="Fir.cpp" />
+    <ClCompile Include="Police.cpp" />
     <ClCompile Include="SystemAdmin.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="C_List.h" />
-    <ClInclude Include="C_Node.h" />
+    <ClInclude Include="Criminal.h" />
     <ClInclude Include="DeveloperNotes.h" />
-    <ClInclude Include="F_List.h" />
-    <ClInclude Include="F_Node.h" />
+    <ClInclude Include="Fir.h" />
     <ClInclude Include="Libraries.h" />
-    <ClInclude Include="P_Node.h" />
-    <ClInclude Include="P_List.h" />
+    <ClInclude Include="Node.h" />
+    <ClInclude Include="Police.h" />
     <ClInclude Include="SystemAdmin.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

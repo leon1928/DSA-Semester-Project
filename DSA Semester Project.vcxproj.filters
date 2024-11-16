@@ -18,54 +18,39 @@
     <ClCompile Include="DSA Semester Project.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="P_Node.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="P_List.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="F_Node.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="F_List.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C_Node.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="C_List.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="SystemAdmin.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Criminal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Fir.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Police.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="P_Node.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="P_List.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Libraries.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DeveloperNotes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="F_Node.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="F_List.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="C_Node.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="C_List.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="SystemAdmin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Node.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Criminal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Fir.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Police.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
